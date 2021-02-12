@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->foreignId('role_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });

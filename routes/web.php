@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RestaurantController;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +28,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/', function () {
             return view('intranet.dashboard');
         });
-        Route::resource('/restaurants', function () {
-        });
+
+        Route::resource('/restaurants', RestaurantController::class);
     });
 });

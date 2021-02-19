@@ -24,7 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::prefix('intranet')->group(function () {
+    Route::middleware(['isNotClient'])->prefix('intranet')->group(function () {
         Route::get('/', function () {
             return view('intranet.dashboard');
         });

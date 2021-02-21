@@ -18,9 +18,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('city');
-            $table->string('phone_number', 9);
-            $table->double('latitude', 10, 8);
-            $table->double('longitude', 10, 8);
+            $table->string('phone');
+            $table->double('latitude');
+            $table->double('longitude');
             $table->timestamps();
         });
     }

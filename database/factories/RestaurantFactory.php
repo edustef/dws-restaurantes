@@ -22,7 +22,12 @@ class RestaurantFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->company,
+            'address' => $this->faker->address,
+            'city' => $this->faker->city,
+            'phone' => $this->faker->phoneNumber,
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude
         ];
     }
 }

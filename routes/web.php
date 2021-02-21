@@ -27,7 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::middleware(['isNotClient'])->prefix('intranet')->group(function () {
         Route::get('/', function () {
             return view('intranet.dashboard');
-        });
+        })->name('intranet');
 
         Route::resource('/restaurants', RestaurantController::class);
     });

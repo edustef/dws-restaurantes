@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\RestaurantController;
-use App\Models\Restaurant;
+use App\Http\Livewire\Intranet\RestaurantComponent;
+use App\Http\Livewire\Intranet\RestaurantsComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             return view('intranet.dashboard');
         })->name('intranet');
 
-        Route::resource('/restaurants', RestaurantController::class);
+        Route::get('/restaurants', RestaurantsComponent::class);
+        Route::get('/restaurants/{restaurant}', RestaurantComponent::class);
     });
 });

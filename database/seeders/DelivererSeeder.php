@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dish;
+use App\Models\Deliverer;
 use Illuminate\Database\Seeder;
 
-class DishSeeder extends Seeder
+class DelivererSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DishSeeder extends Seeder
      */
     public function run()
     {
-        Dish::factory()->count(50)->create();
+        Deliverer::factory()->count(5)->create();
     }
 }

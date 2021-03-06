@@ -2,19 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\Dish;
+use App\Models\Deliverer;
+use App\Models\Order;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DishFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Dish::class;
+    protected $model = Order::class;
 
     /**
      * Define the model's default state.
@@ -23,16 +24,15 @@ class DishFactory extends Factory
      */
     public function definition()
     {
-        $categoryIds = Category::all()->pluck('id')->toArray();
+        $userIds = User::all()->pluck('id')->toArray();
         $restaurantIds = Restaurant::all()->pluck('id')->toArray();
-
+        $delivererIds = Deliverer::all()->pluck('id')->toArray();
+        $status = ['recived', 'delivered', 'canceled'];
         return [
-            'name' => $this->faker->colorName,
-            'description' => $this->faker->paragraph(2),
-            'photo' => 'default.jpg',
-            'price' => $this->faker->randomFloat(2, 1, 30),
+            'user_id' => $this->faker->randomElement($userIds),
             'restaurant_id' => $this->faker->randomElement($restaurantIds),
-            'category_id' => $this->faker->randomElement($categoryIds),
+            'deliverer_id' => $this->faker->randomElement($delivererIds),
+            'status' => $this->faker->randomElement($status),
         ];
     }
 }

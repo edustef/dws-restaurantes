@@ -10,15 +10,26 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.12.13",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.0.2",
-        "axios": "^0.21",
+        "axios": "^0.21.1",
         "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.1"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.8.5",
+        "@inertiajs/inertia-react": "^0.5.4",
+        "@inertiajs/progress": "^0.2.4",
+        "classnames": "^2.2.6",
+        "cross-env": "^7.0.3",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-helmet": "^6.1.0"
     }
 }

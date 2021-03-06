@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RestaurantRequest;
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
-use Inertia\Inertia;
 
-class RestaurantController extends Controller
+class UserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->authorizeResource(Restaurant::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +13,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Intranet/Restaurants/Index');
+        //
     }
 
     /**
@@ -32,7 +23,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Intranet/Restaurants/Create');
+        //
     }
 
     /**
@@ -41,19 +32,20 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RestaurantRequest $request)
+    public function store(Request $request)
     {
-        Restaurant::create($request->validated());
+        //
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show($id)
     {
-        return Inertia::render('Intranet/Restaurant/Index');
+        //
     }
 
     /**
@@ -62,7 +54,7 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant)
+    public function edit($id)
     {
         //
     }
@@ -74,7 +66,7 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -85,7 +77,7 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
         //
     }

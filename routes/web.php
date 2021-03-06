@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Livewire\Intranet\RestaurantComponent;
-use App\Http\Livewire\Intranet\RestaurantsComponent;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DishController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('LandingPage');
+    });
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return Inertia::render('Dashboard');
     })->name('dashboard');
 
     Route::middleware(['isNotClient'])->prefix('intranet')->group(function () {
         Route::get('/', function () {
-            return view('intranet.dashboard');
+            return Inertia::render('Intranet/Index');
         })->name('intranet');
-
-        Route::get('/restaurants', RestaurantsComponent::class);
-        Route::get('/restaurants/{restaurant}', RestaurantComponent::class);
+        Route::resource('/restaurants', RestaurantController::class);
+        Route::resource('/dishes', DishController::class);
+        Route::resource('/categories', CategoryController::class);
+        Route::resource('/users', UserController::class);
     });
 });

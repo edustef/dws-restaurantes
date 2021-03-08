@@ -4,10 +4,11 @@ import MainMenu from "@/Shared/MainMenu";
 import FlashMessages from "@/Shared/FlashMessages";
 import TopHeader from "@/Shared/TopHeader";
 import BottomHeader from "@/Shared/BottomHeader";
+import Container from '@material-ui/core/Container';
 
 export default function Layout({ title, children }) {
   return (
-    <div>
+    <Container maxWidth="sm">
       <Helmet titleTemplate="%s | Ping CRM" title={title} />
       <div className="flex flex-col">
         <div className="flex flex-col h-screen">
@@ -25,6 +26,6 @@ export default function Layout({ title, children }) {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

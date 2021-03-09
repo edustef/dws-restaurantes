@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/explore', [RestaurantController::class, 'explore'])->name('explore');
+    Route::get('/order', [OrderController::class, 'userOrder'])->name('order');
     Route::middleware(['isNotClient'])->prefix('intranet')->group(function () {
         Route::get('/', function () {
             return Inertia::render('Intranet/Index');
@@ -37,5 +40,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('/dishes', DishController::class);
         Route::resource('/categories', CategoryController::class);
         Route::resource('/users', UserController::class);
+        Route::resource('/orders', OrderController::class);
     });
 });

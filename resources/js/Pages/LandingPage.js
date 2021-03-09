@@ -1,9 +1,10 @@
 import React from "react";
 import { InertiaLink } from '@inertiajs/inertia-react';
 import GuestLayout from "@/Shared/Layouts/GuestLayout";
+import Link from '@material-ui/core/Link';
+import { Inertia } from '@inertiajs/inertia';
 
 const LandingPage = () => {
-  let foo = "React";
 
   return <div>
     <div className="m-auto">
@@ -11,12 +12,12 @@ const LandingPage = () => {
       <h2 className="italic text-sm">
         The middleware between you and your favorite food.
       </h2>
-      <InertiaLink
-        href={route('login')}
-        className="px-2 py-1 rounded-full text-white bg-red-500">Login</InertiaLink>
+      <Link href={route('login')} component={InertiaLink}>
+        Login
+      </Link>
     </div>
   </div>;
 };
 
-LandingPage.layout = (page) => <GuestLayout title="Dashboard" children={page} />;
+LandingPage.layout = (page) => <GuestLayout title="Welcome to Foodware!" children={page} />;
 export default LandingPage;

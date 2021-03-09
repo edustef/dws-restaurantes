@@ -1,98 +1,212 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { InertiaLink, useForm } from '@inertiajs/inertia-react';
-import Logo from '@/Shared/Logo';
-import LoadingButton from '@/Shared/LoadingButton';
-import TextInput from '@/Shared/TextInput';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import GuestLayout from '../../Shared/Layouts/GuestLayout';
 
-export default () => {
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(4)
+  },
+  title: {
+    marginBottom: theme.spacing(2)
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  button: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2)
+  },
+}));
+
+const Register = () => {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const classes = useStyles();
   const { data, setData, errors, post, processing } = useForm({
-    email: 'johndoe@example.com',
-    password: 'secret',
+    email: '',
+    password: '',
     password_confirmation: '',
-    remember: true
+    name: '',
+    lastname: '',
+    address: '',
+    city: '',
+    phone: '',
+    dni: '',
+    remember: ''
   });
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('register.attempt'));
+    post(route('register'));
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 bg-indigo-900">
-      <Helmet title="Register" />
-      <div className="w-full max-w-md">
-        <Logo
-          className="block w-full max-w-xs mx-auto text-white fill-current"
-          height={50}
-        />
-        <form
-          onSubmit={handleSubmit}
-          className="mt-8 overflow-hidden bg-white rounded-lg shadow-xl"
-        >
-          <div className="px-10 py-12">
-            <h1 className="text-3xl font-bold text-center">Welcome Back!</h1>
-            <div className="w-24 mx-auto mt-6 border-b-2" />
-            <TextInput
-              className="mt-10"
-              label="Email"
-              name="email"
-              type="email"
-              errors={errors.email}
-              value={data.email}
-              onChange={e => setData('email', e.target.value)}
-            />
-            <TextInput
-              className="mt-6"
-              label="Password"
-              name="password"
-              type="password"
-              errors={errors.password}
-              value={data.password}
-              onChange={e => setData('password', e.target.value)}
-            />
-            <TextInput
-              className="mt-6"
-              label="Confirm Password"
-              name="password_confirmation"
-              type="password"
-              errors={errors.password_confirmation}
-              value={data.password_confirmation}
-              onChange={e => setData('password_confirmation', e.target.value)}
-            />
-            <label
-              className="flex items-center mt-6 select-none"
-              htmlFor="remember"
-            >
-              <input
-                name="remember"
-                id="remember"
-                className="mr-1"
-                type="checkbox"
-                checked={data.remember}
-                onChange={e => setData('remember', e.target.checked)}
-              />
-              <span className="text-sm">Remember Me</span>
-            </label>
-          </div>
-          <div className="flex items-center justify-between px-10 py-4 bg-gray-100 border-t border-gray-200">
-            <InertiaLink
-              className="hover:underline"
-              tabIndex="-1"
-              href={route('login')}
-            >
-              Already registered? Login here!
-            </InertiaLink>
-            <LoadingButton
-              type="submit"
-              loading={processing}
-              className="btn-indigo"
-            >
-              Register
-            </LoadingButton>
-          </div>
+    <main>
+      <Container className={classes.container} component="main" maxWidth="sm">
+        <Typography className={classes.title} component="h1" variant="h4">
+          Sign up
+          </Typography>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <TextField
+            error={Boolean(errors.email)}
+            helperText={errors.email}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={data.email}
+            onChange={e => setData('email', e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={data.password}
+            onChange={e => setData('password', e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password_confirmation"
+            label="Confirm Password"
+            type="password"
+            id="password_confirmation"
+            autoComplete="current-password"
+            value={data.password_confirmation}
+            onChange={e => setData('password_confirmation', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.name)}
+            helperText={errors.name}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
+            value={data.name}
+            onChange={e => setData('name', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.lastname)}
+            helperText={errors.lastname}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="lastname"
+            label="Last Name"
+            name="lastname"
+            autoComplete="last name"
+            value={data.lastname}
+            onChange={e => setData('lastname', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.dni)}
+            helperText={errors.dni}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="dni"
+            label="National ID"
+            name="dni"
+            autoComplete="national id"
+            value={data.dni}
+            onChange={e => setData('dni', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.address)}
+            helperText={errors.address}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="address"
+            label="Address"
+            name="address"
+            autoComplete="address"
+            value={data.address}
+            onChange={e => setData('address', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.city)}
+            helperText={errors.city}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="city"
+            label="City"
+            name="city"
+            autoComplete="city"
+            value={data.city}
+            onChange={e => setData('city', e.target.value)}
+          />
+          <TextField
+            error={Boolean(errors.phone)}
+            helperText={errors.phone}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="phone"
+            label="Phone Number"
+            name="phone"
+            autoComplete="phone"
+            value={data.phone}
+            onChange={e => setData('phone', e.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox value={data.remember} onChange={e => setData('remember', e.target.value)} name="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            className={classes.button}
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={processing}
+            onClick={handleSubmit}
+          >
+            Register
+          </Button>
+
+          <Link component={InertiaLink} href={route('login')} variant="body2">
+            Have an acount? Login here!
+            </Link>
         </form>
-      </div>
-    </div>
+      </Container>
+    </main >
   );
 };
+
+Register.layout = (page) => <GuestLayout title="Login" children={page} />;
+
+export default Register;

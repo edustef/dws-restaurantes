@@ -1,38 +1,41 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import DefaultLayout from '@/Shared/Layouts/DefaultLayout';
+import { List, ListItem, makeStyles } from '@material-ui/core';
+
+const menuItems = [
+  { title: 'Restaurants', route: 'restaurants.index' },
+  { title: 'Dishes', route: 'dishes.index' },
+  { title: 'Categories', route: 'categories.index' },
+  { title: 'Orders', route: 'orders.index' }
+];
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  }
+}));
 
 const Index = () => {
+  const classes = useStyles();
   return (
-    <div>
-      <h1 className="mb-8 text-3xl font-bold">Intranet</h1>
-      <p className="mb-12 leading-normal">
-        Hey there! Welcome to Ping CRM, a demo app designed to help illustrate
-        how
-        <a
-          className="mx-1 text-indigo-600 underline hover:text-orange-500"
-          href="https://inertiajs.com"
-        >
-          Inertia.js
-        </a>
-        works with
-        <a
-          className="ml-1 text-indigo-600 underline hover:text-orange-500"
-          href="https://reactjs.org/"
-        >
-          React
-        </a>
-        .
-      </p>
-      <div>
-        <InertiaLink className="mr-1 btn-indigo" href="/500">
-          500 error
-        </InertiaLink>
-        <InertiaLink className="btn-indigo" href="/404">
-          404 error
-        </InertiaLink>
-      </div>
-    </div>
+    <main>
+      <Container>
+        <Typography className={classes.title} component="h1" variant="h6" color="textSecondary">
+          Intranet
+        </Typography>
+        <List>
+          {menuItems.map(item => (
+            <ListItem key={item.title} component={InertiaLink} href={route(item.route)}>
+              {item.title}
+            </ListItem>
+          ))}
+        </List>
+      </Container>
+    </main >
   );
 };
 

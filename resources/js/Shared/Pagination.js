@@ -1,23 +1,9 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import classNames from 'classnames';
 
 const PageLink = ({ active, label, url }) => {
-  const className = classNames(
-    [
-      'mr-1 mb-1',
-      'px-4 py-3',
-      'border border-solid border-gray-300 rounded',
-      'text-sm',
-      'hover:bg-white',
-      'focus:outline-none focus:border-indigo-700 focus:text-indigo-700'
-    ],
-    {
-      'bg-white': active
-    }
-  );
   return (
-    <InertiaLink className={className} href={url}>
+    <InertiaLink href={url}>
       <span dangerouslySetInnerHTML={{ __html: label }}></span>
     </InertiaLink>
   );
@@ -27,11 +13,8 @@ const PageLink = ({ active, label, url }) => {
 // Next, if on last page
 // and dots, if exists (...)
 const PageInactive = ({ label }) => {
-  const className = classNames(
-    'mr-1 mb-1 px-4 py-3 text-sm border rounded border-solid border-gray-300 text-gray'
-  );
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: label }} />
+    <div dangerouslySetInnerHTML={{ __html: label }} />
   );
 };
 

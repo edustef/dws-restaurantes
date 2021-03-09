@@ -1,15 +1,48 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { useForm } from '@inertiajs/inertia-react';
+import { InertiaLink, useForm } from '@inertiajs/inertia-react';
 import Logo from '@/Shared/Logo';
-import LoadingButton from '@/Shared/LoadingButton';
-import TextInput from '@/Shared/TextInput';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import GuestLayout from '../../Shared/Layouts/GuestLayout';
 
-export default () => {
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+const Login = () => {
+
+  const classes = useStyles();
   const { data, setData, errors, post, processing } = useForm({
-    email: 'admin@example.com',
-    password: 'password',
-    remember: true
+    email: '',
+    password: '',
+    remember: ''
   });
 
   const handleSubmit = (e) => {
@@ -18,67 +51,79 @@ export default () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 bg-indigo-900">
-      <Helmet title="Login" />
-      <div className="w-full max-w-md">
-        <Logo
-          className="block w-full max-w-xs mx-auto text-white fill-current"
-          height={50}
-        />
-        <form
-          onSubmit={handleSubmit}
-          className="mt-8 overflow-hidden bg-white rounded-lg shadow-xl"
-        >
-          <div className="px-10 py-12">
-            <h1 className="text-3xl font-bold text-center">Welcome Back!</h1>
-            <div className="w-24 mx-auto mt-6 border-b-2" />
-            <TextInput
-              className="mt-10"
-              label="Email"
+    <main>
+      <Container component="main" maxWidth="sm">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+        </Typography>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <TextField
+              error={Boolean(errors.email)}
+              helperText={errors.email}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
               name="email"
-              type="email"
-              errors={errors.email}
+              autoComplete="email"
+              autoFocus
               value={data.email}
               onChange={e => setData('email', e.target.value)}
             />
-            <TextInput
-              className="mt-6"
-              label="Password"
+            <TextField
+              error={Boolean(errors.password)}
+              helperText={errors.password}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
               name="password"
+              label="Password"
               type="password"
-              errors={errors.password}
+              id="password"
+              autoComplete="current-password"
               value={data.password}
               onChange={e => setData('password', e.target.value)}
             />
-            <label
-              className="flex items-center mt-6 select-none"
-              htmlFor="rememberf"
-            >
-              <input
-                name="remember"
-                id="remember"
-                className="mr-1"
-                type="checkbox"
-                checked={data.remember}
-                onChange={e => setData('remember', e.target.checked)}
-              />
-              <span className="text-sm">Remember Me</span>
-            </label>
-          </div>
-          <div className="flex items-center justify-between px-10 py-4 bg-gray-100 border-t border-gray-200">
-            <a className="hover:underline" tabIndex="-1" href={route('password.request')}>
-              Forgot password?
-            </a>
-            <LoadingButton
+            <FormControlLabel
+              control={<Checkbox value={data.remember} onChange={e => setData('remember', e.target.value)} name="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
               type="submit"
-              loading={processing}
-              className="btn-indigo"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={processing}
             >
-              Login
-            </LoadingButton>
-          </div>
-        </form>
-      </div>
-    </div>
+              Sign In
+          </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link component={InertiaLink} href={route('password.request')} variant="body2">
+                  Forgot password?
+              </Link>
+              </Grid>
+              <Grid item>
+                <Link component={InertiaLink} href={route('register')} variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
+    </main>
   );
 };
+
+Login.layout = (page) => <GuestLayout title="Login" children={page} />;
+
+export default Login;

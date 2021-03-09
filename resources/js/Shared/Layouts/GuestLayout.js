@@ -1,15 +1,13 @@
+import { Container } from '@material-ui/core';
 import React from "react";
-import Helmet from "react-helmet";
-import Container from "@material-ui/core/Container";
-import BaseLayout from './BaseLayout';
+import BaseLayout from './_BaseLayout';
 
-export default function Layout({ title, children }) {
+export default function GuestLayout({ title, children }) {
   return (
-    <>
-      <Helmet titleTemplate="%s | Ping CRM" title={title} />
-      <BaseLayout>
+    <BaseLayout title={title}>
+      <Container>
         {children}
-      </BaseLayout>
-    </>
+      </Container>
+    </BaseLayout>
   );
 }

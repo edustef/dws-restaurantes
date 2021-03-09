@@ -10,14 +10,14 @@ const Show = () => {
   return (
     <main>
       <Container>
-        <Typography variant="h1">
+        <Typography component="h1" variant="h2">
           Profile
-        </Typography>
+      </Typography>
         <Button variant="contained" color="secondary" method="post" as="button" href={route('logout')} component={InertiaLink}>Logout</Button>
       </Container>
     </main>
   )
 };
 
-Show.layout = (page) => <DefaultLayout title="Dashboard" children={page} />;
+Show.layout = (page) => <DefaultLayout title="Profile" children={page} />;
 export default Show;

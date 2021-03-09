@@ -1,72 +1,82 @@
-import React from 'react';
-import Helmet from "react-helmet";
+import React, { useEffect, useCallback } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import CartIcon from '@material-ui/icons/ShoppingCart';
 import ExploreIcon from '@material-ui/icons/Explore';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import BaseLayout from './BaseLayout';
+import BaseLayout from './_BaseLayout';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import { makeStyles } from '@material-ui/core';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import Logo from '@/Shared/Logo';
 
 const useStyles = makeStyles((theme) => ({
+  topNavigation: {
+    height: '3.5rem'
+  },
   bottomNavigation: {
     width: '100%',
+    height: '3.5rem',
     position: 'fixed',
     bottom: '0',
     boxShadow: theme.shadows[4]
+  },
+  logo: {
+    width: '2rem',
+    height: '2rem',
+    color: 'inherit',
+    marginRight: '0.5rem',
+  },
+  main: {
+    marginBottom: '3.5rem',
+    minHeight: `calc(100vh - 7rem)`
   }
 }));
 
-export default function Layout({ title, children }) {
+export default function DefaultLayout({ title, children }) {
+  const pages = [
+    { label: 'Intranet', name: 'Intranet/Index', route: 'intranet', isNotForClient: true, icon: DashboardIcon },
+    { label: 'Explore', name: 'Explore', route: 'explore', icon: ExploreIcon },
+    { label: 'Order', name: 'Order', route: 'order', icon: CartIcon },
+    { label: 'Profile', name: 'Profile/Show', route: 'profile.show', icon: AccountCircle }
+  ];
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const { user } = usePage().props;
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { props: { user: { data: user } }, component } = usePage();
+  const activeIndex = pages.findIndex((page) => page.name === component);
 
   return (
-    <>
-      <Helmet titleTemplate="%s | Ping CRM" title={title} />
-      <BaseLayout>
-        <AppBar position="sticky" color="primary">
-          <Toolbar>
-            <Typography component={InertiaLink} href={route('dashboard')} variant="h6">
-              Foodware
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <BottomNavigation
-          className={classes.bottomNavigation}
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-        >
-          {user?.role?.name !== 'client' && <BottomNavigationAction href={route('intranet')} label="Intranet" icon={<DashboardIcon />} />}
-          <BottomNavigationAction component={InertiaLink} href={route('dashboard')} label="Explore" icon={<ExploreIcon />} />
-          <BottomNavigationAction label="Order" icon={<CartIcon />} />
-          <BottomNavigationAction component={InertiaLink} href={route('profile.show')} label="Profile" icon={<AccountCircle />} />
-        </BottomNavigation>
+    <BaseLayout title={title}>
+      <AppBar className={classes.topNavigation} position="sticky" color="primary">
+        <Toolbar>
+          <Typography variant="h6">
+            <Link color="inherit" variant="inherit" component={InertiaLink} href={route('dashboard')}>
+              <Logo className={classes.logo} />
+                Foodware
+              </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.main}>
         {children}
-      </BaseLayout>
-    </>
+      </div>
+      <BottomNavigation
+        className={classes.bottomNavigation}
+        value={activeIndex}
+        showLabels
+      >
+        {pages.map(page => {
+          if (page.isNotForClient && user.role === 'client') return;
+
+          return (
+            <BottomNavigationAction key={page.name} component={InertiaLink} href={route(page.route)} label={page.label} icon={React.createElement(page.icon)} />
+          );
+        })}
+      </BottomNavigation>
+    </BaseLayout>
   );
 }
-

@@ -82,4 +82,8 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function userOrder()
+    {
+    }
 }

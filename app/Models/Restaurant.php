@@ -20,8 +20,17 @@ class Restaurant extends Model
         'password',
     ];
 
+    protected $hidden = [
+        'user_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function dishes()
+    {
+        return $this->hasMany(Dish::class);
     }
 }

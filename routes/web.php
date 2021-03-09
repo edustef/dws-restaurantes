@@ -19,6 +19,10 @@ use Inertia\Inertia;
 |
 */
 
+
+Route::get('/explore', [RestaurantController::class, 'explore'])->name('explore');
+Route::get('/explore/{restaurant}', [RestaurantController::class, 'exploreRestaurant'])->name('exploreRestaurant');
+
 Route::middleware('guest')->group(function () {
     Route::get('/', function () {
         return Inertia::render('LandingPage');
@@ -30,8 +34,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/explore', [RestaurantController::class, 'explore'])->name('explore');
     Route::get('/order', [OrderController::class, 'userOrder'])->name('order');
+
     Route::middleware(['isNotClient'])->prefix('intranet')->group(function () {
         Route::get('/', function () {
             return Inertia::render('Intranet/Index');

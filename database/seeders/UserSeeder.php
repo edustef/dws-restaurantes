@@ -34,6 +34,6 @@ class UserSeeder extends Seeder
             'email' => 'client@example.com',
             'role_id' => 1,
         ]);
-        User::factory()->count(10)->create();
+        User::factory()->count(40)->create();
     }
 }

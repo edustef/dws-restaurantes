@@ -22,7 +22,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Intranet/Restaurants/Index');
+        return Inertia::render('Intranet/Restaurant/Index');
     }
 
     /**
@@ -32,7 +32,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Intranet/Restaurants/Create');
+        return Inertia::render('Intranet/Restaurant/Create');
     }
 
     /**
@@ -92,5 +92,11 @@ class RestaurantController extends Controller
 
     public function explore()
     {
+        return Inertia::render('Explore', ['restaurants' => Restaurant::with('user')->paginate(5)]);
+    }
+    public function exploreRestaurant(Restaurant $restaurant)
+    {
+        $restaurantWithOwner = $restaurant->with('user')->first();
+        return Inertia::render('ExploreRestaurant', ['restaurant' => $restaurantWithOwner->toArray()]);
     }
 }

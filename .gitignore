@@ -1,5 +1,6 @@
 /node_modules
-/public/*
+/public/mix-manifest.json
+/public/js/*
 /storage/*.key
 /vendor
 .env

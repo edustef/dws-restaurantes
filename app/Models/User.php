@@ -68,8 +68,18 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function restaurant()
+    {
+        return $this->hasOne(Restaurant::class);
+    }
+
     public function hasRole($role)
     {
         return $this->role->name === $role;
+    }
+
+    public function ownsRestaurant($id)
+    {
+        return $this->restaurant_id = $id;
     }
 }

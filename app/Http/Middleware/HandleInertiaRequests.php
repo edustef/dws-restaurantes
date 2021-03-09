@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -43,6 +46,13 @@ class HandleInertiaRequests extends Middleware
                     'error' => $request->session()->get('error'),
                 ];
             },
+            'user' => function () {
+                if (auth()->id()) {
+                    return new UserResource(User::find(auth()->id()));
+                }
+
+                return null;
+            }
         ]);
     }
 }

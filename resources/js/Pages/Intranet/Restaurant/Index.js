@@ -1,5 +1,4 @@
 import { usePage } from '@inertiajs/inertia-react';
-import { DataGrid } from '@material-ui/data-grid'
 import React from 'react'
 
 const columns = [

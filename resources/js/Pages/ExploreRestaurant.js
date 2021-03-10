@@ -6,34 +6,38 @@ import GuestLayout from '../Shared/Layouts/GuestLayout';
 import DefaultLayout from '../Shared/Layouts/DefaultLayout';
 import { Button, Card, CardActions, CardContent, makeStyles } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import { Inertia } from '@inertiajs/inertia'
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  }
+}));
 
 export default function ExploreRestaurant() {
-  const restaurant = usePage().props.data;
+  const classes = useStyles();
+  const restaurant = usePage().props.restaurant;
+  const authUser = usePage().props.user.data;
+
   console.log(usePage());
   const main = <main>
     <Container className={classes.container}>
       <Typography className={classes.title} component="h1" variant="h5" color="textSecondary">
-        Explore our restaurants
+        {restaurant.name}
       </Typography>
-      <Card>
-        <CardContent>
-          <Typography variant="h4" >
-            {restaurant.name}
-          </Typography>
-          <Typography>
-            {restaurant.address}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button component={InertiaLink} href={route('restaurants.show', restaurant.id)}>See the menu</Button>
-        </CardActions>
-      </Card>
-      <Pagination count={links.length} page={currentPage} onChange={handlePageChange} />
+      <Typography component="h2" variant="h5" >
+        Location
+      </Typography>
+      <Typography>
+        City: {restaurant.city}
+      </Typography>
+      <Typography>
+        Address: {restaurant.address}
+      </Typography>
     </Container>
   </main>;
 
-  if (user) {
+  if (authUser) {
     return (
       <DefaultLayout>
         {main}

@@ -5,9 +5,7 @@ import BaseLayout from './_BaseLayout';
 export default function GuestLayout({ title, children }) {
   return (
     <BaseLayout title={title}>
-      <Container>
-        {children}
-      </Container>
+      {children}
     </BaseLayout>
   );
 }

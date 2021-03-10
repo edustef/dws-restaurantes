@@ -24,7 +24,7 @@ class UserFactory extends Factory
     public function definition()
     {
 
-        $roleIds = Role::all()->pluck('id')->toArray();
+        //$roleIds = Role::all()->pluck('id')->toArray();
         return [
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'dni' => $this->faker->dni,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'role_id' => $this->faker->randomElement($roleIds),
+            //'role_id' => $this->faker->randomElement($roleIds),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];

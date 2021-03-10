@@ -37,13 +37,6 @@ const Register = () => {
     email: '',
     password: '',
     password_confirmation: '',
-    name: '',
-    lastname: '',
-    address: '',
-    city: '',
-    phone: '',
-    dni: '',
-    remember: ''
   });
 
   const handleSubmit = (e) => {
@@ -74,6 +67,8 @@ const Register = () => {
             onChange={e => setData('email', e.target.value)}
           />
           <TextField
+            error={Boolean(errors.password)}
+            helperText={errors.password}
             variant="outlined"
             margin="normal"
             required
@@ -99,90 +94,7 @@ const Register = () => {
             value={data.password_confirmation}
             onChange={e => setData('password_confirmation', e.target.value)}
           />
-          <TextField
-            error={Boolean(errors.name)}
-            helperText={errors.name}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-            value={data.name}
-            onChange={e => setData('name', e.target.value)}
-          />
-          <TextField
-            error={Boolean(errors.lastname)}
-            helperText={errors.lastname}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="lastname"
-            label="Last Name"
-            name="lastname"
-            autoComplete="last name"
-            value={data.lastname}
-            onChange={e => setData('lastname', e.target.value)}
-          />
-          <TextField
-            error={Boolean(errors.dni)}
-            helperText={errors.dni}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="dni"
-            label="National ID"
-            name="dni"
-            autoComplete="national id"
-            value={data.dni}
-            onChange={e => setData('dni', e.target.value)}
-          />
-          <TextField
-            error={Boolean(errors.address)}
-            helperText={errors.address}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="address"
-            label="Address"
-            name="address"
-            autoComplete="address"
-            value={data.address}
-            onChange={e => setData('address', e.target.value)}
-          />
-          <TextField
-            error={Boolean(errors.city)}
-            helperText={errors.city}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="city"
-            label="City"
-            name="city"
-            autoComplete="city"
-            value={data.city}
-            onChange={e => setData('city', e.target.value)}
-          />
-          <TextField
-            error={Boolean(errors.phone)}
-            helperText={errors.phone}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="phone"
-            label="Phone Number"
-            name="phone"
-            autoComplete="phone"
-            value={data.phone}
-            onChange={e => setData('phone', e.target.value)}
-          />
+
           <FormControlLabel
             control={<Checkbox value={data.remember} onChange={e => setData('remember', e.target.value)} name="remember" color="primary" />}
             label="Remember me"

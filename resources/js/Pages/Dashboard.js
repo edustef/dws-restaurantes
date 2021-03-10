@@ -12,14 +12,6 @@ const Dashboard = () => {
         <Typography component="h1" variant="h2">
           Foodware
         </Typography>
-        <div>
-          Inertia Link:
-        <InertiaLink href="/dashboard">link</InertiaLink>
-        </div>
-        <div>
-          Ziggy link:
-          {route('dashboard')}
-        </div>
       </Container>
     </main>
   )

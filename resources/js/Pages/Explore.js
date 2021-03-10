@@ -59,7 +59,7 @@ const Explore = () => {
         </Grid>
       </Box>
 
-      <Pagination count={links.length} page={currentPage} onChange={handlePageChange} />
+      <Pagination count={links.length} size="small" page={currentPage} onChange={handlePageChange} />
     </Container>
   </main>;
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RestaurantRequest;
+use App\Http\Resources\RestaurantResource;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use Inertia\Inertia;
@@ -22,7 +23,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Intranet/Restaurant/Index');
+        return Inertia::render('Intranet/Restaurant/Index', [
+            'restaurants' => Restaurant::paginate(5)
+        ]);
     }
 
     /**
@@ -96,7 +99,6 @@ class RestaurantController extends Controller
     }
     public function exploreRestaurant(Restaurant $restaurant)
     {
-        $restaurantWithOwner = $restaurant->with('user')->first();
-        return Inertia::render('ExploreRestaurant', ['restaurant' => $restaurantWithOwner->toArray()]);
+        return Inertia::render('ExploreRestaurant', ['restaurant' => new RestaurantResource($restaurant)]);
     }
 }

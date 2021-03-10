@@ -11,13 +11,9 @@ class Restaurant extends Model
 
     protected $fillable = [
         'name',
-        'lastname',
         'address',
         'city',
         'phone',
-        'dni',
-        'email',
-        'password',
     ];
 
     protected $hidden = [

@@ -35,7 +35,7 @@ const Explore = () => {
       <Box my={2}>
         <Grid container spacing={2}>
           {restaurants ? restaurants.map((restaurant) => (
-            <Grid key={restaurant.id} item xs={12}>
+            <Grid key={restaurant.id} item xs={12} md={4}>
               <Card>
                 <CardContent>
                   <Typography variant="h5" component="h2">

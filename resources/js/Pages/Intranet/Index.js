@@ -3,19 +3,26 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import DefaultLayout from '@/Shared/Layouts/DefaultLayout';
-import { List, ListItem, makeStyles } from '@material-ui/core';
+import SearchInput from '@/Shared/SearchInput';
+import { Divider, List, ListItem, makeStyles } from '@material-ui/core';
 
 const menuItems = [
   { title: 'Restaurants', route: 'restaurants.index' },
   { title: 'Dishes', route: 'dishes.index' },
   { title: 'Categories', route: 'categories.index' },
-  { title: 'Orders', route: 'orders.index' }
+  { title: 'Orders', route: 'orders.index' },
+  { title: 'Users', route: 'users.index' }
 ];
 
 const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2)
+  },
+  listItem: {
+    '&:hover': {
+      backgroundColor: theme.palette.success.main
+    }
   }
 }));
 
@@ -27,9 +34,9 @@ const Index = () => {
         <Typography className={classes.title} component="h1" variant="h6" color="textSecondary">
           Intranet
         </Typography>
-        <List>
+        <List component="nav">
           {menuItems.map(item => (
-            <ListItem key={item.title} component={InertiaLink} href={route(item.route)}>
+            <ListItem key={item.title} className={classes.listItem} component={InertiaLink} href={route(item.route)}>
               {item.title}
             </ListItem>
           ))}

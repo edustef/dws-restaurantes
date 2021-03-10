@@ -84,7 +84,7 @@ class OrderController extends Controller
         //
     }
 
-    public function userOrder()
+    public function userOrder(Request $request)
     {
         return Inertia::render('Order');
     }

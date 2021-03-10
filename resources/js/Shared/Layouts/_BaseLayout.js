@@ -13,14 +13,14 @@ export default function BaseLayout({ children, title }) {
         palette: {
           type: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: '#382933'
+            main: '#067a4d'
           },
           secondary: {
-            main: "#3b5249"
+            main: "#27aa80"
           },
           success: {
-            main: "#519872"
-          }
+            main: "#a4b494"
+          },
         },
       }),
     [prefersDarkMode]

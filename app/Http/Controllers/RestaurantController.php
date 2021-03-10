@@ -56,7 +56,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return Inertia::render('Intranet/Restaurant/Index');
+        return Inertia::render('Intranet/Restaurant/Show', ['restaurant' => new RestaurantResource($restaurant)]);
     }
 
     /**
@@ -67,7 +67,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return Inertia::render('Intranet/Restaurant/Edit', ['restaurant' => new RestaurantResource($restaurant)]);
     }
 
     /**

@@ -28,6 +28,14 @@ mix.js("resources/js/app.js", "public/js")
                 "@": path.resolve("resources/js"),
             },
         },
+        module: {
+            rules: [
+                {
+                    test: /\.svg$/,
+                    use: ['@svgr/webpack'],
+                },
+            ]
+        }
     })
     .version()
     .sourceMaps();

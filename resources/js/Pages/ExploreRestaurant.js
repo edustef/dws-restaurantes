@@ -5,7 +5,6 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import GuestLayout from '../Shared/Layouts/GuestLayout';
 import DefaultLayout from '../Shared/Layouts/DefaultLayout';
 import { Button, Card, CardActions, CardContent, makeStyles } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -16,10 +15,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ExploreRestaurant() {
   const classes = useStyles();
-  const restaurant = usePage().props.restaurant;
-  const authUser = usePage().props.user.data;
+  const restaurant = usePage().props.restaurant.data;
+  const authUser = usePage().props?.user?.data;
 
-  console.log(usePage());
   const main = <main>
     <Container className={classes.container}>
       <Typography className={classes.title} component="h1" variant="h5" color="textSecondary">
@@ -34,6 +32,7 @@ export default function ExploreRestaurant() {
       <Typography>
         Address: {restaurant.address}
       </Typography>
+      <Button component={InertiaLink} href={route('order')} data={{ restaurant: restaurant.id }}>Place order</Button>
     </Container>
   </main>;
 

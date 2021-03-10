@@ -12,7 +12,10 @@ const path = require("path");
  |
  */
 
+mix.extract();
+
 mix.js("resources/js/app.js", "public/js")
+    .react()
     .postCss("resources/css/app.css", "public/css", [
         require("postcss-import"),
         require("tailwindcss"),
@@ -28,6 +31,3 @@ mix.js("resources/js/app.js", "public/js")
     })
     .version()
     .sourceMaps();
-if (mix.inProduction()) {
-    mix.version();
-}

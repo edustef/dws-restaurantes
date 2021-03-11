@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 const Explore = () => {
   const classes = useStyles();
   const [query, setQuery] = useState('');
-  console.log(usePage());
   const user = usePage().props?.user?.data;
   const restaurants = usePage().props.restaurants;
 

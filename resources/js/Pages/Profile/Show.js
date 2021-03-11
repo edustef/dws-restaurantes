@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 const Show = () => {
   const classes = useStyles();
   const user = usePage().props.user.data;
-  console.log(usePage());
 
   return (
     <main>

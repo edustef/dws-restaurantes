@@ -21,7 +21,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('phone');
             $table->double('latitude');
             $table->double('longitude');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

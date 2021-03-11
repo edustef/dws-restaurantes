@@ -7,7 +7,6 @@
 //   const categories = categoriesData.data;
 //   const links = categoriesData.links;
 
-//   console.log(categories);
 //   return (
 //     <div>
 //       Category show page

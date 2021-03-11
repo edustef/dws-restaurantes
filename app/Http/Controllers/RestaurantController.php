@@ -21,10 +21,14 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $restaurants = RestaurantResource::collection(Restaurant::where('name', 'LIKE', "%{$request['q']}%")
+            ->orderBy($request['orderBy'] ?? 'name', $request['order'] ?? 'ASC')
+            ->paginate(5));
+
         return Inertia::render('Intranet/Restaurant/Index', [
-            'restaurants' => Restaurant::paginate(5)
+            'restaurants' => $restaurants,
         ]);
     }
 
@@ -47,6 +51,7 @@ class RestaurantController extends Controller
     public function store(RestaurantRequest $request)
     {
         Restaurant::create($request->validated());
+        return redirect(route('restaurants.index'));
     }
 
     /**
@@ -77,9 +82,10 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(RestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $restaurant->update($request->validated());
+        return redirect(route('restaurants.index'));
     }
 
     /**
@@ -90,7 +96,8 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect(route('restaurants.index'));
     }
 
     public function explore()

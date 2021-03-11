@@ -19,7 +19,7 @@ class CreateDishesTable extends Migration
             $table->string('description');
             $table->string('photo');
             $table->decimal('price', 8, 2);
-            $table->foreignId('restaurant_id')->constrained();
+            $table->foreignId('restaurant_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

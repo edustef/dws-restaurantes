@@ -15,8 +15,8 @@ class CreateDishOrderTable extends Migration
     {
         Schema::create('dish_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dish_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('dish_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

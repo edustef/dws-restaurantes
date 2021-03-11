@@ -14,6 +14,8 @@ class Restaurant extends Model
         'address',
         'city',
         'phone',
+        'latitude',
+        'longitude'
     ];
 
     protected $hidden = [

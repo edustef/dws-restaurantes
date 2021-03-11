@@ -11,7 +11,6 @@ export default function BaseLayout({ children, title }) {
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? "dark" : "light",
           primary: {
             main: '#067a4d'
           },
@@ -23,7 +22,6 @@ export default function BaseLayout({ children, title }) {
           },
         },
       }),
-    [prefersDarkMode]
   );
   theme = responsiveFontSizes(theme);
 

@@ -4,25 +4,35 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-
+  title: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
 }));
 
 const Show = () => {
+  const classes = useStyles();
   const user = usePage().props.user.data;
+  console.log(usePage());
 
   return (
     <main>
       <Container>
-        <Typography component="h1" variant="h2">
+        <Typography className={classes.title} component="h1" variant="h6" color="textSecondary">
           Profile
-          </Typography>
+        </Typography>
         <Typography>
-          {user.name}
+          {user.email}
         </Typography>
         <Button variant="contained" color="secondary" method="post" as="button" href={route('logout')} component={InertiaLink}>Logout</Button>
+        <Box>
+          <Typography className={classes.title} component="h2" variant="h5" color="textSecondary">
+            Order history
+          </Typography>
+        </Box>
       </Container>
     </main>
   )

@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 const Show = () => {
   const classes = useStyles();
   const restaurant = usePage().props.restaurant.data;
-  console.log(restaurant);
 
   return (
     <main>

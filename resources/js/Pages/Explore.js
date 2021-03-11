@@ -21,7 +21,6 @@ const Explore = () => {
   const restaurants = usePage().props.restaurants.data;
   const links = usePage().props.restaurants.links;
   const currentPage = usePage().props.restaurants.current_page;
-  console.log(usePage());
 
   const handlePageChange = (e, val) => {
     Inertia.visit(links[val].url);

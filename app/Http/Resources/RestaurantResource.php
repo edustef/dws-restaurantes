@@ -15,13 +15,14 @@ class RestaurantResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'address' => $this->address,
             'city' => $this->city,
             'phone' => $this->phone,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'user' => $this->user->toArray(),
+            'user' => $this->user ? $this->user->toArray() : null,
             'dishes' => DishResource::collection($this->dishes)
         ];
     }

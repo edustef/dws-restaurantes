@@ -44,14 +44,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchInput(props) {
+
+
+export default function SearchInput({ setQuery, ...props }) {
   const classes = useStyles();
+
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
       <InputBase
+        onChange={(e) => setQuery(e.target.value)}
         {...props}
         type="query"
         classes={{

@@ -100,9 +100,14 @@ class RestaurantController extends Controller
         return redirect(route('restaurants.index'));
     }
 
-    public function explore()
+    public function explore(Request $request)
     {
-        return Inertia::render('Explore', ['restaurants' => Restaurant::with('user')->paginate(5)]);
+        $restaurants = RestaurantResource::collection(Restaurant::where('name', 'LIKE', "%{$request['q']}%")
+            ->paginate(5));
+
+        return Inertia::render('Explore', [
+            'restaurants' => $restaurants,
+        ]);
     }
     public function exploreRestaurant(Restaurant $restaurant)
     {
